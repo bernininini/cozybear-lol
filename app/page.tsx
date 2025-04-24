@@ -71,7 +71,7 @@ export default function Home() {
       {!showStudyPage ? (
         <div className="flex flex-col items-center justify-center space-y-8">
           <h1 className="text-5xl md:text-6xl font-bold text-center text-[#6d4848]">
-            berni<span className="mx-1">🐨</span>bean
+            cozy<span className="mx-1">🐨</span>bear
           </h1>
           <h2 className="text-xl md:text-2xl text-[#6d4848]">✨ berni bean koala bear ✨</h2>
           <Button
