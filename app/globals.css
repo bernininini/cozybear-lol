@@ -26,7 +26,7 @@ body {
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 346 77% 49.8%;
+    --primary: 346, 13%, 44%;
     --primary-foreground: 355 100% 97.3%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
@@ -48,7 +48,7 @@ body {
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 346 77% 49.8%;
+    --primary: 346, 13%, 44%;
     --primary-foreground: 355 100% 97.3%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
@@ -71,4 +71,22 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom styles for the sleep page slider */
+.sleep-slider [data-radix-slider-thumb] {
+  background-color: white;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+}
+
+.sleep-slider [data-radix-slider-track] {
+  background-color: #d8c0c0;
+  height: 8px;
+}
+
+.sleep-slider [data-radix-slider-range] {
+  background-color: #6d4848;
+  height: 8px;
 }

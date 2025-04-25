@@ -6,8 +6,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Berni Bean Koala Bear",
-  description: "Interactive 3D Koala Bear by Berni Bean",
+  title: "Berni Bean",
+  description: "Koala Bear by Berni Bean",
     generator: 'v0.dev'
 }
 
