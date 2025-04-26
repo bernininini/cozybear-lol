@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import { Plus, Minus, AtSign, X, ArrowLeft, ArrowRight, Trash2 } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { motion, AnimatePresence } from "framer-motion"
@@ -149,11 +148,13 @@ export default function StudyPage() {
   return (
     <main className="min-h-screen bg-[#e8dada] flex flex-col p-8">
       <div className="absolute top-4 left-4">
-        <Link href="/">
-          <Button type="button" className="bg-[#6d4848] hover:bg-[#5a3a3a] text-white">
-            Back to Home
-          </Button>
-        </Link>
+        <Button
+          type="button"
+          className="bg-[#6d4848] hover:bg-[#5a3a3a] text-white"
+          onClick={() => window.history.back()}
+        >
+          Back
+        </Button>
       </div>
 
       <h1 className="text-4xl font-medium text-[#6d4848] mt-12 mb-6 ml-4">study</h1>
@@ -219,8 +220,7 @@ export default function StudyPage() {
                 onClick={() => setShowFlashcards(true)}
                 className="text-[#6d4848] text-xl font-medium flex items-center"
               >
-                <Plus className="w-6 h-6 mr-2" />
-                FLASHCARDS
+                FLASHCARDS🔖
               </button>
             </div>
           ) : (
@@ -271,8 +271,7 @@ export default function StudyPage() {
                       onClick={() => setShowAddCard(true)}
                       className="bg-[#6d4848] hover:bg-[#5a3a3a] text-white px-4 py-2 rounded-md flex items-center"
                     >
-                      <Plus className="w-4 h-4 mr-2" />
-                      Add Card
+                      FLASHCARDS🔖
                     </button>
                     <button
                       onClick={() => deleteFlashcard(flashcards[activeCardIndex]?.id)}
@@ -292,8 +291,7 @@ export default function StudyPage() {
                     onClick={() => setShowAddCard(true)}
                     className="bg-[#6d4848] hover:bg-[#5a3a3a] text-white px-4 py-2 rounded-md flex items-center mx-auto"
                   >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create Flashcard
+                    FLASHCARDS🔖
                   </button>
                 </div>
               )}

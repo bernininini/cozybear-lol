@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from "react"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import { Plus, Minus } from "lucide-react"
 import { Slider } from "@/components/ui/slider"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -14,8 +13,8 @@ export default function SleepPage() {
   const [currentDate, setCurrentDate] = useState("")
   const [logCount, setLogCount] = useState(1)
   const now = useMemo(() => {
-    return new Date();
-  }, []);
+    return new Date()
+  }, [])
 
   // Initialize sleep logs from local storage
   useEffect(() => {
@@ -66,11 +65,13 @@ export default function SleepPage() {
   return (
     <main className="min-h-screen bg-[#e8dada] flex flex-col items-center justify-center p-4">
       <div className="absolute top-4 left-4">
-        <Link href="/">
-          <Button type="button" className="bg-[#6d4848] hover:bg-[#5a3a3a] text-white">
-            Back to Home
-          </Button>
-        </Link>
+        <Button
+          type="button"
+          className="bg-[#6d4848] hover:bg-[#5a3a3a] text-white"
+          onClick={() => window.history.back()}
+        >
+          Back
+        </Button>
       </div>
 
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-6 mt-16">
