@@ -184,7 +184,7 @@ export default function ProfilePage() {
                 transition={{ duration: 0.3 }}
               >
                 <span className="text-2xl mr-2">🎿</span>
-                <span className="font-medium">CSIA LEVEL 1</span>
+                <span className="font-medium">Skiing Instruting</span>
               </motion.div>
               <motion.div
                 className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
@@ -192,7 +192,7 @@ export default function ProfilePage() {
                 transition={{ duration: 0.3 }}
               >
                 <span className="text-2xl mr-2">🚑</span>
-                <span className="font-medium">CPR and FIRST AID</span>
+                <span className="font-medium">CPR/FIRST AID</span>
               </motion.div>
             </div>
           </div>
