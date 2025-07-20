@@ -40,7 +40,7 @@ export default function ProfilePage() {
                 Toronto, Canada 🇨🇦
               </p>
               <div className="bg-[#f5eeee] p-4 rounded-lg">
-                <p className="text-[#6d4848] italic">"Code by day, ski by weekend, teach with heart always! 💻🎿❤️"</p>
+                <p className="text-[#6d4848] italic">"Code by day, ski by weekend 💻🎿❤️"</p>
               </div>
             </div>
           </div>
@@ -183,8 +183,16 @@ export default function ProfilePage() {
                 whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
                 transition={{ duration: 0.3 }}
               >
-                <span className="text-2xl mr-2">👩‍🏫</span>
-                <span className="font-medium">Teaching</span>
+                <span className="text-2xl mr-2">🎿</span>
+                <span className="font-medium">CSIA LEVEL 1</span>
+              </motion.div>
+              <motion.div
+                className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
+                whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-2xl mr-2">🚑</span>
+                <span className="font-medium">CPR and FIRST AID</span>
               </motion.div>
             </div>
           </div>
