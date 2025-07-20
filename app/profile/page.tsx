@@ -123,7 +123,7 @@ export default function ProfilePage() {
                 transition={{ duration: 0.3 }}
               >
                 <span className="text-2xl mr-2">🎨</span>
-                <span className="font-medium">Design</span>
+                <span className="font-medium">Procreate</span>
               </motion.div>
             </div>
           </div>
@@ -186,14 +186,48 @@ export default function ProfilePage() {
                 <span className="text-2xl mr-2">🎿</span>
                 <span className="font-medium">Skiing Instruting</span>
               </motion.div>
+            
+              <motion.div
+                className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
+                whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-2xl mr-2">❤️</span>
+                <span className="font-medium">CPR/AED</span>
+              </motion.div>
               <motion.div
                 className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
                 whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
                 transition={{ duration: 0.3 }}
               >
                 <span className="text-2xl mr-2">🚑</span>
-                <span className="font-medium">CPR/FIRST AID</span>
+                <span className="font-medium">First Aid</span>
               </motion.div>
+              <motion.div
+                className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
+                whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-2xl mr-2">⚙️</span>
+                <span className="font-medium">CAD</span>
+              </motion.div>
+              <motion.div
+                className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
+                whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-2xl mr-2">📓</span>
+                <span className="font-medium">Grapghic Design</span>
+              </motion.div>
+              <motion.div
+                className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
+                whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-2xl mr-2">💻</span>
+                <span className="font-medium">Video Editing</span>
+              </motion.div>
+
             </div>
           </div>
         </motion.div>
