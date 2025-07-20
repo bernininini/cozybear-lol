@@ -1,0 +1,5 @@
+{
+  // Run pnpm without the frozen-lockfile flag so the lockfile
+  // is updated automatically in the build container.
+  "installCommand": "pnpm install --no-frozen-lockfile"
+}
