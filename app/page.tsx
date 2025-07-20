@@ -127,6 +127,8 @@ export default function Home() {
                 { duration: 500, easing: "ease-in-out" },
               )
             }
+            // Navigate to profile page
+            router.push("/profile")
           }}
           id="berni-text"
         >
