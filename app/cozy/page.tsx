@@ -30,6 +30,8 @@ export default function CozyPage() {
       </div>
 
       <div className="flex flex-col items-center justify-center space-y-8">
+        {/* Logo removed */}
+
         <motion.h1
           className="text-5xl md:text-6xl font-bold text-center text-[#6d4848]"
           initial={{ opacity: 0, y: -20 }}
