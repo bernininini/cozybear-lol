@@ -151,7 +151,7 @@ export default function ChatPage() {
           </motion.div>
 
           {/* Chat Messages */}
-          <div className="flex-1 bg-white rounded-none border-x-4 border-[#d8c0c0]">
+          <div className="flex-1 bg-[#f5eeee] rounded-none border-x-4 border-[#d8c0c0]">
             <ScrollArea className="h-[500px] p-6">
               <div className="space-y-4" ref={scrollAreaRef}>
                 {messages.length === 0 && (
@@ -318,20 +318,22 @@ export default function ChatPage() {
           </motion.div>
 
           <motion.div
-            className="flex-1 bg-white border-x-4 border-[#d8c0c0] rounded-b-3xl"
+            className="flex-1 bg-white border-x-4 border-[#d8c0c0] rounded-b-3xl overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <div
-              ref={notesRef}
-              contentEditable
-              onInput={handleNotesInput}
-              className="w-full h-full p-6 outline-none text-[#6d4848] min-h-[580px] leading-relaxed"
-              style={{ wordWrap: "break-word" }}
-              suppressContentEditableWarning={true}
-              placeholder="Start taking notes here... You can use the formatting buttons above!"
-            />
+            <ScrollArea className="h-[580px]">
+              <div
+                ref={notesRef}
+                contentEditable
+                onInput={handleNotesInput}
+                className="w-full p-6 outline-none text-[#6d4848] min-h-[580px] leading-relaxed"
+                style={{ wordWrap: "break-word" }}
+                suppressContentEditableWarning={true}
+                placeholder="Start taking notes here... You can use the formatting buttons above!"
+              />
+            </ScrollArea>
           </motion.div>
         </div>
       </div>
