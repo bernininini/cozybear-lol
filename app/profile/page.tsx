@@ -40,7 +40,7 @@ export default function ProfilePage() {
                 Toronto, Canada 🇨🇦
               </p>
               <div className="bg-[#f5eeee] p-4 rounded-lg">
-                <p className="text-[#6d4848] italic">"Code by day, ski by weekend 💻🎿❤️"</p>
+                <p className="text-[#6d4848] italic">"Code by day, ski by weekend, teach with heart always! 💻🎿❤️"</p>
               </div>
             </div>
           </div>
@@ -85,6 +85,36 @@ export default function ProfilePage() {
               >
                 <span className="text-2xl mr-2">✚</span>
                 <span className="font-medium">C++</span>
+              </motion.div>
+            </div>
+          </div>
+          {/* Languages */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-[#6d4848] mb-3">Speaking Languages</h3>
+            <div className="flex flex-wrap gap-3">
+              <motion.div
+                className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
+                whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-2xl mr-2">🇨🇦</span>
+                <span className="font-medium">English</span>
+              </motion.div>
+              <motion.div
+                className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
+                whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-2xl mr-2">🇨🇳</span>
+                <span className="font-medium">Cantonese</span>
+              </motion.div>
+              <motion.div
+                className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
+                whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-2xl mr-2">🇨🇳</span>
+                <span className="font-medium">Mandarin</span>
               </motion.div>
             </div>
           </div>
@@ -184,9 +214,9 @@ export default function ProfilePage() {
                 transition={{ duration: 0.3 }}
               >
                 <span className="text-2xl mr-2">🎿</span>
-                <span className="font-medium">Skiing Instruting</span>
+                <span className="font-medium">Skiing Instructing</span>
               </motion.div>
-            
+
               <motion.div
                 className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
                 whileHover={{ scale: 1.05, backgroundColor: "#6d4848", color: "white" }}
@@ -217,7 +247,7 @@ export default function ProfilePage() {
                 transition={{ duration: 0.3 }}
               >
                 <span className="text-2xl mr-2">📓</span>
-                <span className="font-medium">Grapghic Design</span>
+                <span className="font-medium">Graphic Design</span>
               </motion.div>
               <motion.div
                 className="bg-[#f5eeee] px-4 py-2 rounded-full flex items-center"
@@ -227,7 +257,6 @@ export default function ProfilePage() {
                 <span className="text-2xl mr-2">💻</span>
                 <span className="font-medium">Video Editing</span>
               </motion.div>
-
             </div>
           </div>
         </motion.div>
@@ -324,6 +353,20 @@ export default function ProfilePage() {
                 <h3 className="text-lg font-bold text-[#6d4848]">Tutor</h3>
               </div>
               <p className="text-[#6d4848]">Providing personalized learning support and academic guidance</p>
+            </motion.div>
+            <motion.div
+              className="bg-[#f5eeee] p-6 rounded-xl"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex items-center mb-3">
+                <div className="text-2xl mr-3">📼</div>
+                <h3 className="text-lg font-bold text-[#6d4848]">Video Editing</h3>
+              </div>
+              <p className="text-[#6d4848]">
+                Craft a high-energy, visually punchy video that captures the intensity, teamwork, and highlights of teen
+                basketball teams.
+              </p>
             </motion.div>
             <motion.div
               className="bg-[#f5eeee] p-6 rounded-xl"

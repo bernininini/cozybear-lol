@@ -4,13 +4,14 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { BookOpen, Moon, Coffee } from "lucide-react"
+import { BookOpen, Moon, Coffee, MessageCircle } from "lucide-react"
 
 export default function CozyPage() {
   const [showTabs, setShowTabs] = useState(false)
 
   const tabs = [
     { name: "study", icon: <BookOpen className="w-5 h-5 mr-2" />, href: "/study" },
+    { name: "chat", icon: <MessageCircle className="w-5 h-5 mr-2" />, href: "/chat" },
     { name: "sleep", icon: <Moon className="w-5 h-5 mr-2" />, href: "/sleep" },
     { name: "relax", icon: <Coffee className="w-5 h-5 mr-2" />, href: "/relax" },
   ]
