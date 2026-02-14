@@ -1,12 +1,23 @@
 import type React from "react"
 import "./globals.css"
-import { Inter } from "next/font/google"
+import { Playfair_Display, JetBrains_Mono } from "next/font/google"
 
-const inter = Inter({ subsets: ["latin"] })
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+})
 
 export const metadata = {
-  title: "My Site",
-  description: "A blank site",
+  title: "Bernice Qiu",
+  description: "CS Student, Builder, AV Enthusiast",
+  icons: {
+    icon: "/favicon.ico",
+  },
     generator: 'v0.app'
 }
 
@@ -16,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${playfair.variable} ${jetbrains.variable}`}>
+      <body className="font-mono antialiased">{children}</body>
     </html>
   )
 }
