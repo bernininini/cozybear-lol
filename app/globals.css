@@ -165,9 +165,12 @@
   position: relative;
 }
 
-/* Invert map images in light mode so black bg becomes white */
+/* Invert map images in light mode: white bg, gold outlines */
 .light .carousel-card img {
-  filter: invert(1) sepia(0.15) saturate(0.5) brightness(1.05);
+  filter: invert(1) sepia(0.6) saturate(1.8) hue-rotate(-10deg) brightness(0.85);
+}
+.light .carousel-card {
+  border-color: rgba(160, 130, 80, 0.3);
 }
 
 @keyframes carousel-spin {
