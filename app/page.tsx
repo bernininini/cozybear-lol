@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
 import { LightSwitch } from "@/components/light-switch"
 import { GalleryWall } from "@/components/gallery-wall"
 import { PortraitFrame } from "@/components/portrait-frame"
@@ -12,31 +11,30 @@ import { Github, Linkedin, Mail } from "lucide-react"
 const projects = [
   {
     title: "BayLee",
-    subtitle: "Gen AI Award @ UTRA Hacks (Top 7/350)",
+    subtitle: "Gen AI Award @ UTRA Hacks",
     description:
       "AI-powered health assistant robot. Python, Vercel AI SDK, Redis microservices, and OpenAI Whisper for voice control.",
     tags: ["Python", "AI SDK", "Redis", "Whisper"],
-    image: "/images/project-baylee.jpg",
     date: "Feb 2025",
+    link: "https://devpost.com/software/baylee",
   },
   {
     title: "Snow Pea",
-    subtitle: "Participant @ Hack Club Undercity",
+    subtitle: "Top 10 Finalist @ Hack Club Undercity",
     description:
       "Integrated hardware and software systems with collaborative GitHub workflows.",
     tags: ["Hardware", "Full Stack", "GitHub"],
-    image: "/images/project-snowpea.jpg",
     date: "Jul 2025",
-    objectContain: true,
+    link: "https://github.com/prisca7c/PEAS-ARE-BEST-FROZEN---Finalist-Undercity-2025",
   },
   {
     title: "Neo=Alert",
-    subtitle: "Participant @ Hack The Ridge",
+    subtitle: "2nd Place @ Hack The Ridge",
     description:
       "Medical alert platform using a custom ML model to detect bradycardia in infants.",
     tags: ["Machine Learning", "Healthcare", "Python"],
-    image: "/images/project-neoalert.jpg",
     date: "Dec 2024",
+    link: "https://devpost.com/software/neo-alert",
   },
   {
     title: "Bean Cake",
@@ -44,16 +42,15 @@ const projects = [
     description:
       "High-speed tank-drive spy robot with real-time camera streaming. Chassis designed in Fusion 360, powered by ESP32 and Arduino.",
     tags: ["ESP32", "Arduino", "Fusion 360", "Robotics"],
-    image: "/images/project-beancake.jpg",
     date: "Aug 2025",
-    objectContain: true,
+    link: "https://github.com/bernininini/bean-cake",
   },
 ]
 
 const awards = [
-  { title: "Gen AI Award", event: "UTRA Hacks", detail: "Top 7 / 350" },
-  { title: "Participant", event: "Hack Club Undercity", detail: "Jul 2025" },
-  { title: "Participant", event: "Hack The Ridge", detail: "Dec 2024" },
+  { title: "Gen AI Award", event: "UTRA Hacks", detail: "Feb 2025" },
+  { title: "Top 10 Finalist", event: "Hack Club Undercity", detail: "Jul 2025" },
+  { title: "2nd Place", event: "Hack The Ridge", detail: "Dec 2024" },
   { title: "Participant", event: "Scrapyard Toronto", detail: "2025" },
   { title: "Distinction (Top 25%)", event: "Canadian Computing Competition", detail: "CCC" },
   { title: "Ontario Scholar Award", event: "York Mills CI", detail: "2025" },
@@ -129,8 +126,50 @@ function AnimatedSection({
   )
 }
 
+const countryMaps = [
+  { name: "Canada", image: "/images/map-canada.jpg" },
+  { name: "USA", image: "/images/map-usa.jpg" },
+  { name: "Japan", image: "/images/map-japan.jpg" },
+  { name: "Taiwan", image: "/images/map-taiwan.jpg" },
+  { name: "China", image: "/images/map-china.jpg" },
+  { name: "Hong Kong", image: "/images/map-hongkong.jpg" },
+  { name: "Indonesia", image: "/images/map-indonesia.jpg" },
+  { name: "Thailand", image: "/images/map-thailand.jpg" },
+  { name: "Malaysia", image: "/images/map-malaysia.jpg" },
+]
+
+/* Fixed background 3D spinning carousel of country maps */
+function SpinningCarousel() {
+  return (
+    <div className="carousel-bg" aria-hidden="true">
+      <div className="carousel-scene">
+        <div className="carousel-ring">
+          {countryMaps.map((c, i) => (
+            <div
+              key={c.name}
+              className="carousel-card"
+              style={{ "--i": i } as React.CSSProperties}
+            >
+              <img
+                src={c.image}
+                alt=""
+                className="h-full w-full object-cover"
+                draggable={false}
+              />
+              <span className="absolute bottom-2 left-0 right-0 text-center text-[10px] uppercase tracking-widest text-white/60">
+                {c.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   const [isLight, setIsLight] = useState(false)
+  const [titleHovered, setTitleHovered] = useState(false)
 
   useEffect(() => {
     if (isLight) {
@@ -140,35 +179,68 @@ export default function Home() {
     }
   }, [isLight])
 
+  const titleLetters = "Bernice Qiu".split("")
+
   return (
     <div className="relative min-h-screen pb-12 transition-colors duration-500">
+      {/* 3D spinning country maps -- fixed background layer */}
+      <SpinningCarousel />
+
+      {/* All content above the carousel */}
+      <div className="relative z-10">
       <LightSwitch isLight={isLight} onToggle={() => setIsLight((p) => !p)} />
 
       {/* === HERO === */}
       <header className="mx-auto flex min-h-[80vh] max-w-6xl flex-col items-center justify-center px-6 py-20 text-center">
         <motion.h1
-          className="font-serif text-5xl font-black leading-tight text-foreground text-glow sm:text-6xl lg:text-8xl"
+          className="font-serif text-5xl font-black leading-tight text-foreground sm:text-6xl lg:text-8xl cursor-default"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          onMouseEnter={() => setTitleHovered(true)}
+          onMouseLeave={() => setTitleHovered(false)}
         >
-          Bernice Qiu
+          {titleLetters.map((letter, i) => (
+            <motion.span
+              key={i}
+              className="inline-block text-glow"
+              animate={
+                titleHovered
+                  ? {
+                      y: [0, -12, 0],
+                      textShadow: [
+                        "0 0 10px rgba(var(--glow-rgb), 0.6), 0 0 30px rgba(var(--glow-rgb), 0.3)",
+                        "0 0 20px rgba(var(--glow-rgb), 1), 0 0 60px rgba(var(--glow-rgb), 0.6), 0 0 100px rgba(var(--glow-rgb), 0.3)",
+                        "0 0 10px rgba(var(--glow-rgb), 0.6), 0 0 30px rgba(var(--glow-rgb), 0.3)",
+                      ],
+                    }
+                  : { y: 0 }
+              }
+              transition={{
+                duration: 0.5,
+                delay: i * 0.04,
+                ease: "easeInOut",
+              }}
+            >
+              {letter === " " ? "\u00A0" : letter}
+            </motion.span>
+          ))}
         </motion.h1>
 
         <motion.p
-          className="mt-3 text-sm text-muted-foreground text-glow-subtle"
+          className="mt-6 text-xs uppercase tracking-[0.3em] text-muted-foreground"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {"ML Honours Stream, CS @ UAlberta \u2014 transferring to UofT 2029"}
+          ML Honours Stream, CS @ UAlberta
         </motion.p>
 
         <motion.p
-          className="mt-8 max-w-xl text-sm leading-relaxed text-foreground/70 text-center"
+          className="mt-10 max-w-xl text-sm leading-relaxed text-foreground/70 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           {"I\u2019m Bernice (but you can call me "}
           <span className="font-serif italic text-foreground text-glow-subtle">Berni</span>
@@ -214,17 +286,11 @@ export default function Home() {
         </div>
       </GalleryWall>
 
-      {/* === PROJECTS WALL === */}
+      {/* === PROJECTS WALL (no images, text only) === */}
       <GalleryWall title="Projects" subtitle="things I built and shipped" index={1}>
         <div className="grid gap-6 sm:grid-cols-2">
           {projects.map((project, i) => (
-            <PortraitFrame
-              key={project.title}
-              index={i}
-              image={project.image}
-              alt={project.title}
-              objectContain={project.objectContain}
-            >
+            <PortraitFrame key={project.title} index={i}>
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="font-serif text-lg font-bold text-foreground text-glow-subtle">
                   {project.title}
@@ -248,6 +314,21 @@ export default function Home() {
                     {tag}
                   </span>
                 ))}
+              </div>
+              {/* Rolling link at the bottom of the frame */}
+              <div className="mt-4 overflow-hidden border-t border-border pt-2">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="animate-ticker whitespace-nowrap">
+                    <span className="inline-block text-[10px] font-mono tracking-wider text-muted-foreground hover:text-foreground transition-colors">
+                      {project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;{project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;{project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;
+                    </span>
+                  </div>
+                </a>
               </div>
             </PortraitFrame>
           ))}
@@ -333,6 +414,7 @@ export default function Home() {
 
       {/* === ROLLING WEATHER TICKER === */}
       <WeatherTicker />
+      </div>{/* end z-10 wrapper */}
     </div>
   )
 }

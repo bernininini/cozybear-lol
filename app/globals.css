@@ -111,6 +111,79 @@
   }
 }
 
+/* 3D spinning carousel -- fixed background layer */
+.carousel-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  opacity: 0.3;
+}
+
+.light .carousel-bg {
+  opacity: 0.18;
+}
+
+.carousel-scene {
+  display: grid;
+  overflow: hidden;
+  perspective: 35em;
+  /* lateral fade so edge cards dissolve out */
+  mask:
+    linear-gradient(90deg,
+      #0000, #000 15% 85%, #0000);
+  -webkit-mask:
+    linear-gradient(90deg,
+      #0000, #000 15% 85%, #0000);
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-ring {
+  place-self: center;
+  display: grid;
+  transform-style: preserve-3d;
+  animation: carousel-spin 32s linear infinite;
+}
+
+.carousel-card {
+  --n: 9;
+  --w: 14em;
+  --ba: calc(1turn / var(--n));
+  grid-area: 1 / 1;
+  width: var(--w);
+  aspect-ratio: 7 / 10;
+  object-fit: cover;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform:
+    rotateY(calc(var(--i) * var(--ba)))
+    translateZ(calc(-1 * (.5 * var(--w) + .5em) / tan(.5 * var(--ba))));
+  border: 1px solid rgba(var(--glow-rgb), 0.25);
+  position: relative;
+}
+
+/* Invert map images in light mode: white bg with warm gold outlines */
+.light .carousel-card img {
+  filter: invert(1) sepia(0.45) saturate(2.5) hue-rotate(5deg) brightness(0.7) contrast(1.1);
+}
+.light .carousel-card {
+  border-color: rgba(180, 140, 60, 0.35);
+}
+.light .carousel-card span {
+  color: rgba(140, 110, 50, 0.7);
+}
+
+@keyframes carousel-spin {
+  to { rotate: y 1turn; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-ring { animation-duration: 128s; }
+}
+
 /* Ticker animation */
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
