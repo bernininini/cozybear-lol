@@ -93,7 +93,7 @@ export default function Home() {
                 rotate: { repeat: Number.POSITIVE_INFINITY, duration: 0.5 },
               },
             }}
-            onClick={() => router.push("/bean")}
+            onClick={() => router.push("/bean-chat")}
           >
             bean
           </motion.div>
