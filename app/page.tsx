@@ -16,6 +16,7 @@ const projects = [
       "AI-powered health assistant robot. Python, Vercel AI SDK, Redis microservices, and OpenAI Whisper for voice control.",
     tags: ["Python", "AI SDK", "Redis", "Whisper"],
     date: "Feb 2025",
+    link: "https://devpost.com/software/baylee",
   },
   {
     title: "Snow Pea",
@@ -24,6 +25,7 @@ const projects = [
       "Integrated hardware and software systems with collaborative GitHub workflows.",
     tags: ["Hardware", "Full Stack", "GitHub"],
     date: "Jul 2025",
+    link: "https://github.com/prisca7c/PEAS-ARE-BEST-FROZEN---Finalist-Undercity-2025",
   },
   {
     title: "Neo=Alert",
@@ -32,6 +34,7 @@ const projects = [
       "Medical alert platform using a custom ML model to detect bradycardia in infants.",
     tags: ["Machine Learning", "Healthcare", "Python"],
     date: "Dec 2024",
+    link: "https://devpost.com/software/neo-alert",
   },
   {
     title: "Bean Cake",
@@ -40,6 +43,7 @@ const projects = [
       "High-speed tank-drive spy robot with real-time camera streaming. Chassis designed in Fusion 360, powered by ESP32 and Arduino.",
     tags: ["ESP32", "Arduino", "Fusion 360", "Robotics"],
     date: "Aug 2025",
+    link: "https://github.com/bernininini/bean-cake",
   },
 ]
 
@@ -310,6 +314,21 @@ export default function Home() {
                     {tag}
                   </span>
                 ))}
+              </div>
+              {/* Rolling link at the bottom of the frame */}
+              <div className="mt-4 overflow-hidden border-t border-border pt-2">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="animate-ticker whitespace-nowrap">
+                    <span className="inline-block text-[10px] font-mono tracking-wider text-muted-foreground hover:text-foreground transition-colors">
+                      {project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;{project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;{project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;
+                    </span>
+                  </div>
+                </a>
               </div>
             </PortraitFrame>
           ))}
