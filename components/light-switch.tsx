@@ -23,7 +23,7 @@ export function LightSwitch({ isLight, onToggle }: LightSwitchProps) {
     <div className="fixed top-0 right-8 z-50 flex flex-col items-center">
       {/* Ceiling mount */}
       <div
-        className="h-3 w-6 rounded-b-sm"
+        className="h-3 w-6"
         style={{ backgroundColor: isLight ? "#888" : "#555" }}
       />
 
@@ -47,9 +47,9 @@ export function LightSwitch({ isLight, onToggle }: LightSwitchProps) {
           }}
         />
 
-        {/* Bulb / pull handle */}
+        {/* Bulb / pull handle - sharp square shape */}
         <motion.div
-          className="flex items-center justify-center rounded-full border-2 transition-all duration-500"
+          className="flex items-center justify-center border-2 transition-all duration-500"
           style={{
             width: 28,
             height: 28,
@@ -59,14 +59,11 @@ export function LightSwitch({ isLight, onToggle }: LightSwitchProps) {
               ? "0 0 16px 4px rgba(251,191,36,0.5)"
               : "0 0 8px 2px rgba(255,255,255,0.05)",
           }}
-          animate={{
-            scale: isPulled ? 0.85 : 1,
-          }}
+          animate={{ scale: isPulled ? 0.85 : 1 }}
           transition={{ type: "spring", stiffness: 500, damping: 20 }}
         >
-          {/* Light rays or dot */}
           <div
-            className="rounded-full transition-all duration-500"
+            className="transition-all duration-500"
             style={{
               width: isLight ? 10 : 6,
               height: isLight ? 10 : 6,
@@ -84,10 +81,8 @@ export function LightSwitch({ isLight, onToggle }: LightSwitchProps) {
           }}
         />
         <div
-          className="w-2 h-2 rounded-full transition-colors duration-500"
-          style={{
-            backgroundColor: isLight ? "#666" : "#444",
-          }}
+          className="w-2 h-2 transition-colors duration-500"
+          style={{ backgroundColor: isLight ? "#666" : "#444" }}
         />
       </motion.div>
     </div>

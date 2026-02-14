@@ -23,7 +23,7 @@
     --border: 0 0% 16%;
     --input: 0 0% 16%;
     --ring: 0 0% 90%;
-    --radius: 0.5rem;
+    --radius: 0px;
 
     --grid-color: rgba(255, 255, 255, 0.04);
     --grid-size: 40px;
@@ -113,14 +113,9 @@
 
 /* Ticker animation */
 @keyframes ticker-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-
 .animate-ticker {
   animation: ticker-scroll 25s linear infinite;
 }
