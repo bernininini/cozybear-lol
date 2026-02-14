@@ -1,14 +1,24 @@
 import type React from "react"
 import "./globals.css"
-import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Playfair_Display, JetBrains_Mono } from "next/font/google"
 
-const inter = Inter({ subsets: ["latin"] })
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+})
 
 export const metadata = {
-  title: "Berni Bean",
-  description: "Koala Bear by Berni Bean",
-    generator: 'v0.dev'
+  title: "Bernice Qiu",
+  description: "CS Student, Builder, AV Enthusiast",
+  icons: {
+    icon: "/favicon.ico",
+  },
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -17,12 +27,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en" className={`${playfair.variable} ${jetbrains.variable}`}>
+      <body className="font-mono antialiased">{children}</body>
     </html>
   )
 }

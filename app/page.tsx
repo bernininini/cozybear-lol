@@ -1,153 +1,338 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { useRouter } from "next/navigation"
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+import { LightSwitch } from "@/components/light-switch"
+import { GalleryWall } from "@/components/gallery-wall"
+import { PortraitFrame } from "@/components/portrait-frame"
+import { WeatherTicker } from "@/components/weather-ticker"
+import { Github, Linkedin, Mail } from "lucide-react"
 
-// Component for fixed position koala emojis
-const FixedKoala = ({ position }) => {
+const projects = [
+  {
+    title: "BayLee",
+    subtitle: "Gen AI Award @ UTRA Hacks (Top 7/350)",
+    description:
+      "AI-powered health assistant robot. Python, Vercel AI SDK, Redis microservices, and OpenAI Whisper for voice control.",
+    tags: ["Python", "AI SDK", "Redis", "Whisper"],
+    image: "/images/project-baylee.jpg",
+    date: "Feb 2025",
+  },
+  {
+    title: "Snow Pea",
+    subtitle: "Participant @ Hack Club Undercity",
+    description:
+      "Integrated hardware and software systems with collaborative GitHub workflows.",
+    tags: ["Hardware", "Full Stack", "GitHub"],
+    image: "/images/project-snowpea.jpg",
+    date: "Jul 2025",
+    objectContain: true,
+  },
+  {
+    title: "Neo=Alert",
+    subtitle: "Participant @ Hack The Ridge",
+    description:
+      "Medical alert platform using a custom ML model to detect bradycardia in infants.",
+    tags: ["Machine Learning", "Healthcare", "Python"],
+    image: "/images/project-neoalert.jpg",
+    date: "Dec 2024",
+  },
+  {
+    title: "Bean Cake",
+    subtitle: "Personal Project",
+    description:
+      "High-speed tank-drive spy robot with real-time camera streaming. Chassis designed in Fusion 360, powered by ESP32 and Arduino.",
+    tags: ["ESP32", "Arduino", "Fusion 360", "Robotics"],
+    image: "/images/project-beancake.jpg",
+    date: "Aug 2025",
+    objectContain: true,
+  },
+]
+
+const awards = [
+  { title: "Gen AI Award", event: "UTRA Hacks", detail: "Top 7 / 350" },
+  { title: "Participant", event: "Hack Club Undercity", detail: "Jul 2025" },
+  { title: "Participant", event: "Hack The Ridge", detail: "Dec 2024" },
+  { title: "Participant", event: "Scrapyard Toronto", detail: "2025" },
+  { title: "Distinction (Top 25%)", event: "Canadian Computing Competition", detail: "CCC" },
+  { title: "Ontario Scholar Award", event: "York Mills CI", detail: "2025" },
+  { title: "Computer Engineering Distinction", event: "York Mills CI", detail: "Award" },
+]
+
+const experience = [
+  {
+    role: "Co-President",
+    org: "York Mills Technology Council",
+    time: "Sep 2023 -- Jun 2025",
+    detail:
+      "Led cross-functional teams and secured admin approval for school-wide technical events. Planned and emceed CETA, a TDSB board-wide robotics competition.",
+  },
+  {
+    role: "Skiing Instructor",
+    org: "CSIA Level 1 Certified",
+    time: "Sep 2024 -- Jun 2025",
+    detail:
+      "Taught skiing to kids and seniors. Focused on safety, proper technique, and building confidence on the slopes.",
+  },
+  {
+    role: "Tutor, TA & Instructor",
+    org: "Academic & Community Support",
+    time: "Jan 2023 -- Present",
+    detail:
+      "Tutored Math and Python; served as TA for high school programming courses. CPR and First Aid certified.",
+  },
+]
+
+const skills = [
+  "C++",
+  "Python",
+  "Arduino",
+  "ESP32",
+  "STM32",
+  "AutoCAD",
+  "Fusion 360",
+  "SketchUp",
+  "KiCad",
+  "Final Cut Pro",
+  "Adobe PS",
+]
+
+const links = [
+  { label: "GitHub", href: "https://github.com/bernininini", icon: Github },
+  { label: "LinkedIn", href: "https://linkedin.com/in/bernice-qiu", icon: Linkedin },
+  { label: "Email", href: "mailto:berniceqiu31@gmail.com", icon: Mail },
+]
+
+function AnimatedSection({
+  children,
+  className,
+  delay = 0,
+}: {
+  children: React.ReactNode
+  className?: string
+  delay?: number
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: "-80px" })
+
   return (
     <motion.div
-      className="absolute text-2xl cursor-pointer z-10"
-      style={{
-        left: `${position.x}%`,
-        top: `${position.y}%`,
-      }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: position.delay }}
-      whileHover={{
-        scale: 1.5,
-        transition: { duration: 0.3 },
-      }}
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
     >
-      🐨
+      {children}
     </motion.div>
   )
 }
 
 export default function Home() {
-  const router = useRouter()
-  const [koalaPositions, setKoalaPositions] = useState([])
+  const [isLight, setIsLight] = useState(false)
 
-  // Generate koala positions in a more structured way
   useEffect(() => {
-    // Create a grid of positions
-    const positions = [
-      { x: 10, y: 15, delay: 0.1 },
-      { x: 20, y: 85, delay: 0.2 },
-      { x: 30, y: 40, delay: 0.3 },
-      { x: 40, y: 65, delay: 0.4 },
-      { x: 50, y: 25, delay: 0.5 },
-      { x: 60, y: 75, delay: 0.6 },
-      { x: 70, y: 35, delay: 0.7 },
-      { x: 80, y: 60, delay: 0.8 },
-      { x: 90, y: 20, delay: 0.9 },
-      { x: 15, y: 50, delay: 1.0 },
-      { x: 25, y: 10, delay: 1.1 },
-      { x: 35, y: 90, delay: 1.2 },
-      { x: 45, y: 30, delay: 1.3 },
-      { x: 55, y: 70, delay: 1.4 },
-      { x: 65, y: 15, delay: 1.5 },
-      { x: 75, y: 45, delay: 1.6 },
-      { x: 85, y: 80, delay: 1.7 },
-      { x: 95, y: 55, delay: 1.8 },
-    ]
-    setKoalaPositions(positions)
-  }, [])
+    if (isLight) {
+      document.documentElement.classList.add("light")
+    } else {
+      document.documentElement.classList.remove("light")
+    }
+  }, [isLight])
 
   return (
-    <main className="min-h-screen bg-[#f0ece8] flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Fixed position koalas */}
-      {koalaPositions.map((position, index) => (
-        <FixedKoala key={index} position={position} />
-      ))}
+    <div className="relative min-h-screen pb-12 transition-colors duration-500">
+      <LightSwitch isLight={isLight} onToggle={() => setIsLight((p) => !p)} />
 
-      {/* Main content */}
-      <div className="z-20 flex flex-col items-center justify-center w-full h-full">
-        <div className="flex flex-col md:flex-row items-center justify-between w-full px-8 mb-16 mt-8 md:mt-0 md:absolute md:top-[15%]">
-          <motion.div
-            className="text-5xl md:text-7xl font-bold text-black mx-8 cursor-pointer"
-            whileHover={{
-              scale: 1.1,
-              color: "#6d4848",
-              rotate: [-1, 1, -1, 1, 0],
-              transition: {
-                duration: 0.3,
-                rotate: { repeat: Number.POSITIVE_INFINITY, duration: 0.5 },
-              },
-            }}
-            onClick={() => router.push("/cozy")}
-          >
-            cozy bear
-          </motion.div>
+      {/* === HERO === */}
+      <header className="mx-auto flex min-h-[80vh] max-w-6xl flex-col items-center justify-center px-6 py-20 text-center">
+        <motion.h1
+          className="font-serif text-5xl font-black leading-tight text-foreground text-glow sm:text-6xl lg:text-8xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Bernice Qiu
+        </motion.h1>
 
-          <motion.div
-            className="text-5xl md:text-7xl font-bold text-black mx-8 cursor-pointer mt-4 md:mt-0"
-            whileHover={{
-              scale: 1.1,
-              color: "#6d4848",
-              rotate: [-1, 1, -1, 1, 0],
-              transition: {
-                duration: 0.3,
-                rotate: { repeat: Number.POSITIVE_INFINITY, duration: 0.5 },
-              },
-            }}
-            onClick={() => router.push("/bean")}
-          >
-            bean
-          </motion.div>
+        <motion.p
+          className="mt-3 text-sm text-muted-foreground text-glow-subtle"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          {"ML Honours Stream, CS @ UAlberta \u2014 transferring to UofT 2029"}
+        </motion.p>
+
+        <motion.p
+          className="mt-8 max-w-xl text-sm leading-relaxed text-foreground/70 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+        >
+          {"I\u2019m Bernice (but you can call me "}
+          <span className="font-serif italic text-foreground text-glow-subtle">Berni</span>
+          {" or "}
+          <span className="font-serif italic text-foreground text-glow-subtle">Bean</span>
+          {"). I\u2019m obsessed with CS, cool UI, and building things that move. I build robots, participate in hackathons, and teach people things along the way."}
+        </motion.p>
+
+        <motion.div
+          className="mt-8 flex items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+        >
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              className="flex h-10 w-10 items-center justify-center border border-border text-muted-foreground transition-all duration-300 hover:border-foreground/30 hover:text-foreground hover:box-glow"
+            >
+              <link.icon className="h-4 w-4" />
+            </a>
+          ))}
+        </motion.div>
+      </header>
+
+      {/* === SKILLS WALL === */}
+      <GalleryWall title="Skills" subtitle="tools of the trade" index={0}>
+        <div className="flex flex-wrap justify-center gap-3">
+          {skills.map((skill, i) => (
+            <AnimatedSection key={skill} delay={i * 0.04}>
+              <motion.span
+                className="border-2 border-[var(--frame-color)] bg-card px-4 py-2 text-xs font-bold uppercase tracking-wider text-foreground transition-all duration-300 hover:border-[var(--frame-highlight)] hover:text-glow-subtle hover:box-glow box-glow inline-block"
+                whileHover={{ scale: 1.08, y: -2 }}
+              >
+                {skill}
+              </motion.span>
+            </AnimatedSection>
+          ))}
         </div>
+      </GalleryWall>
 
-        <motion.div
-          className="text-6xl md:text-9xl font-black text-black mb-4 cursor-pointer"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          whileHover={{
-            scale: 1.05,
-            transition: { duration: 0.3 },
-          }}
-          whileTap={{
-            scale: 0.95,
-            transition: { duration: 0.1 },
-          }}
-          onClick={() => {
-            // Pop animation
-            const element = document.getElementById("berni-text")
-            if (element) {
-              element.animate(
-                [
-                  { transform: "scale(1)" },
-                  { transform: "scale(1.2)" },
-                  { transform: "scale(0.9)" },
-                  { transform: "scale(1.1)" },
-                  { transform: "scale(1)" },
-                ],
-                { duration: 500, easing: "ease-in-out" },
-              )
-            }
-            // Navigate to profile page
-            router.push("/profile")
-          }}
-          id="berni-text"
-        >
-          berni bean
-        </motion.div>
+      {/* === PROJECTS WALL === */}
+      <GalleryWall title="Projects" subtitle="things I built and shipped" index={1}>
+        <div className="grid gap-6 sm:grid-cols-2">
+          {projects.map((project, i) => (
+            <PortraitFrame
+              key={project.title}
+              index={i}
+              image={project.image}
+              alt={project.title}
+              objectContain={project.objectContain}
+            >
+              <div className="flex items-baseline justify-between gap-2">
+                <h3 className="font-serif text-lg font-bold text-foreground text-glow-subtle">
+                  {project.title}
+                </h3>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  {project.date}
+                </span>
+              </div>
+              <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                {project.subtitle}
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-foreground/60">
+                {project.description}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="border border-border px-2 py-0.5 text-[10px] text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </PortraitFrame>
+          ))}
+        </div>
+      </GalleryWall>
 
-        <motion.div
-          className="text-xl md:text-2xl text-black"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          whileHover={{
-            letterSpacing: "0.1em",
-            transition: { duration: 0.3 },
-          }}
-        >
-          Køålå Beå®
-        </motion.div>
-      </div>
-    </main>
+      {/* === AWARDS WALL === */}
+      <GalleryWall title="Awards" subtitle="recognition" index={2}>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {awards.map((item, i) => (
+            <PortraitFrame key={item.event + item.title} index={i}>
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                {item.detail}
+              </span>
+              <h3 className="mt-1 font-serif text-base font-bold text-foreground text-glow-subtle">
+                {item.title}
+              </h3>
+              <p className="mt-0.5 text-xs text-muted-foreground">{item.event}</p>
+            </PortraitFrame>
+          ))}
+        </div>
+      </GalleryWall>
+
+      {/* === EXPERIENCE WALL === */}
+      <GalleryWall title="Experience" subtitle="where I have worked" index={3}>
+        <div className="grid gap-5 sm:grid-cols-2">
+          {experience.map((item, i) => (
+            <PortraitFrame key={item.role} index={i}>
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className="font-serif text-base font-bold text-foreground text-glow-subtle">
+                  {item.role}
+                </h3>
+                <span className="text-[10px] text-muted-foreground">{item.time}</span>
+              </div>
+              <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                {item.org}
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-foreground/60">{item.detail}</p>
+            </PortraitFrame>
+          ))}
+        </div>
+      </GalleryWall>
+
+      {/* === EDUCATION WALL === */}
+      <GalleryWall title="Education" subtitle="where I have studied" index={4}>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              school: "University of Toronto",
+              program: "B.Sc. with Honours (Transferring)",
+              time: "Expected 2029",
+              location: "Toronto, ON",
+            },
+            {
+              school: "University of Alberta",
+              program: "B.Sc. Computing Science, ML Honours Stream",
+              time: "2025 -- 2026",
+              location: "Edmonton, AB",
+            },
+            {
+              school: "York Mills Collegiate Institute",
+              program: "OSSD; Ontario Scholar Award",
+              time: "Graduated 2025",
+              location: "Toronto, ON",
+            },
+          ].map((item, i) => (
+            <PortraitFrame key={item.school} index={i}>
+              <h3 className="font-serif text-base font-bold text-foreground text-glow-subtle">
+                {item.school}
+              </h3>
+              <p className="mt-1 text-xs text-muted-foreground">{item.program}</p>
+              <div className="mt-2 flex items-baseline justify-between text-[10px] text-muted-foreground/70">
+                <span>{item.location}</span>
+                <span>{item.time}</span>
+              </div>
+            </PortraitFrame>
+          ))}
+        </div>
+      </GalleryWall>
+
+      {/* Spacer for ticker */}
+      <div className="h-16" />
+
+      {/* === ROLLING WEATHER TICKER === */}
+      <WeatherTicker />
+    </div>
   )
 }
