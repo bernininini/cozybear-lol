@@ -111,6 +111,38 @@
   }
 }
 
+/* 3D spinning globe */
+.globe-scene {
+  perspective: 800px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.globe-ring {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: globe-spin 20s linear infinite;
+}
+
+.globe-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  margin-left: -30px;
+  margin-top: -20px;
+}
+
+@keyframes globe-spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
 /* Ticker animation */
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }

@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
 import { LightSwitch } from "@/components/light-switch"
 import { GalleryWall } from "@/components/gallery-wall"
 import { PortraitFrame } from "@/components/portrait-frame"
@@ -27,7 +26,6 @@ const projects = [
     tags: ["Hardware", "Full Stack", "GitHub"],
     image: "/images/project-snowpea.jpg",
     date: "Jul 2025",
-    objectContain: true,
   },
   {
     title: "Neo=Alert",
@@ -46,7 +44,6 @@ const projects = [
     tags: ["ESP32", "Arduino", "Fusion 360", "Robotics"],
     image: "/images/project-beancake.jpg",
     date: "Aug 2025",
-    objectContain: true,
   },
 ]
 
@@ -98,6 +95,18 @@ const skills = [
   "Adobe PS",
 ]
 
+const countries = [
+  { name: "Canada", code: "CA" },
+  { name: "USA", code: "US" },
+  { name: "Japan", code: "JP" },
+  { name: "Taiwan", code: "TW" },
+  { name: "China", code: "CN" },
+  { name: "Hong Kong", code: "HK" },
+  { name: "Indonesia", code: "ID" },
+  { name: "Thailand", code: "TH" },
+  { name: "Malaysia", code: "MY" },
+]
+
 const links = [
   { label: "GitHub", href: "https://github.com/bernininini", icon: Github },
   { label: "LinkedIn", href: "https://linkedin.com/in/bernice-qiu", icon: Linkedin },
@@ -129,8 +138,48 @@ function AnimatedSection({
   )
 }
 
+/* Spinning 3D Globe of countries visited */
+function GlobeRing() {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: "-80px" })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.8 }}
+      className="flex flex-col items-center gap-8"
+    >
+      {/* 3D spinning ring */}
+      <div className="globe-scene">
+        <div className="globe-ring">
+          {countries.map((country, i) => {
+            const angle = (360 / countries.length) * i
+            return (
+              <div
+                key={country.code}
+                className="globe-item"
+                style={{
+                  transform: `rotateY(${angle}deg) translateZ(180px)`,
+                }}
+              >
+                <span className="inline-flex flex-col items-center gap-1 text-foreground text-glow-subtle">
+                  <span className="text-2xl">{country.code}</span>
+                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground">{country.name}</span>
+                </span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function Home() {
   const [isLight, setIsLight] = useState(false)
+  const [titleHovered, setTitleHovered] = useState(false)
 
   useEffect(() => {
     if (isLight) {
@@ -140,6 +189,8 @@ export default function Home() {
     }
   }, [isLight])
 
+  const titleLetters = "Bernice Qiu".split("")
+
   return (
     <div className="relative min-h-screen pb-12 transition-colors duration-500">
       <LightSwitch isLight={isLight} onToggle={() => setIsLight((p) => !p)} />
@@ -147,28 +198,54 @@ export default function Home() {
       {/* === HERO === */}
       <header className="mx-auto flex min-h-[80vh] max-w-6xl flex-col items-center justify-center px-6 py-20 text-center">
         <motion.h1
-          className="font-serif text-5xl font-black leading-tight text-foreground text-glow sm:text-6xl lg:text-8xl"
+          className="font-serif text-5xl font-black leading-tight text-foreground sm:text-6xl lg:text-8xl cursor-default"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          onMouseEnter={() => setTitleHovered(true)}
+          onMouseLeave={() => setTitleHovered(false)}
         >
-          Bernice Qiu
+          {titleLetters.map((letter, i) => (
+            <motion.span
+              key={i}
+              className="inline-block text-glow"
+              animate={
+                titleHovered
+                  ? {
+                      y: [0, -12, 0],
+                      textShadow: [
+                        "0 0 10px rgba(var(--glow-rgb), 0.6), 0 0 30px rgba(var(--glow-rgb), 0.3)",
+                        "0 0 20px rgba(var(--glow-rgb), 1), 0 0 60px rgba(var(--glow-rgb), 0.6), 0 0 100px rgba(var(--glow-rgb), 0.3)",
+                        "0 0 10px rgba(var(--glow-rgb), 0.6), 0 0 30px rgba(var(--glow-rgb), 0.3)",
+                      ],
+                    }
+                  : { y: 0 }
+              }
+              transition={{
+                duration: 0.5,
+                delay: i * 0.04,
+                ease: "easeInOut",
+              }}
+            >
+              {letter === " " ? "\u00A0" : letter}
+            </motion.span>
+          ))}
         </motion.h1>
 
         <motion.p
-          className="mt-3 text-sm text-muted-foreground text-glow-subtle"
+          className="mt-6 text-xs uppercase tracking-[0.3em] text-muted-foreground"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {"ML Honours Stream, CS @ UAlberta \u2014 transferring to UofT 2029"}
+          ML Honours Stream, CS @ UAlberta
         </motion.p>
 
         <motion.p
-          className="mt-8 max-w-xl text-sm leading-relaxed text-foreground/70 text-center"
+          className="mt-10 max-w-xl text-sm leading-relaxed text-foreground/70 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           {"I\u2019m Bernice (but you can call me "}
           <span className="font-serif italic text-foreground text-glow-subtle">Berni</span>
@@ -214,8 +291,13 @@ export default function Home() {
         </div>
       </GalleryWall>
 
+      {/* === COUNTRIES GLOBE === */}
+      <GalleryWall title="Places" subtitle="countries visited" index={1}>
+        <GlobeRing />
+      </GalleryWall>
+
       {/* === PROJECTS WALL === */}
-      <GalleryWall title="Projects" subtitle="things I built and shipped" index={1}>
+      <GalleryWall title="Projects" subtitle="things I built and shipped" index={2}>
         <div className="grid gap-6 sm:grid-cols-2">
           {projects.map((project, i) => (
             <PortraitFrame
@@ -223,7 +305,6 @@ export default function Home() {
               index={i}
               image={project.image}
               alt={project.title}
-              objectContain={project.objectContain}
             >
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="font-serif text-lg font-bold text-foreground text-glow-subtle">
@@ -255,7 +336,7 @@ export default function Home() {
       </GalleryWall>
 
       {/* === AWARDS WALL === */}
-      <GalleryWall title="Awards" subtitle="recognition" index={2}>
+      <GalleryWall title="Awards" subtitle="recognition" index={3}>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {awards.map((item, i) => (
             <PortraitFrame key={item.event + item.title} index={i}>
@@ -272,7 +353,7 @@ export default function Home() {
       </GalleryWall>
 
       {/* === EXPERIENCE WALL === */}
-      <GalleryWall title="Experience" subtitle="where I have worked" index={3}>
+      <GalleryWall title="Experience" subtitle="where I have worked" index={4}>
         <div className="grid gap-5 sm:grid-cols-2">
           {experience.map((item, i) => (
             <PortraitFrame key={item.role} index={i}>
@@ -292,7 +373,7 @@ export default function Home() {
       </GalleryWall>
 
       {/* === EDUCATION WALL === */}
-      <GalleryWall title="Education" subtitle="where I have studied" index={4}>
+      <GalleryWall title="Education" subtitle="where I have studied" index={5}>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
