@@ -117,49 +117,60 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.12;
+  display: grid;
+  place-items: center;
+  opacity: 0.3;
 }
 
 .light .carousel-bg {
-  opacity: 0.08;
+  opacity: 0.18;
 }
 
 .carousel-scene {
-  perspective: 1200px;
+  display: grid;
+  overflow: hidden;
+  perspective: 35em;
+  /* lateral fade so edge cards dissolve out */
+  mask:
+    linear-gradient(90deg,
+      #0000, #000 15% 85%, #0000);
+  -webkit-mask:
+    linear-gradient(90deg,
+      #0000, #000 15% 85%, #0000);
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .carousel-ring {
-  width: 160px;
-  height: 200px;
-  position: relative;
+  place-self: center;
+  display: grid;
   transform-style: preserve-3d;
-  animation: carousel-spin 35s linear infinite;
+  animation: carousel-spin 32s linear infinite;
 }
 
 .carousel-card {
-  position: absolute;
-  width: 160px;
-  height: 200px;
-  top: 0;
-  left: 0;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+  --n: 9;
+  --w: 14em;
+  --ba: calc(1turn / var(--n));
+  grid-area: 1 / 1;
+  width: var(--w);
+  aspect-ratio: 7 / 10;
+  object-fit: cover;
   overflow: hidden;
-  border: 1px solid rgba(var(--glow-rgb), 0.2);
+  backface-visibility: hidden;
+  transform:
+    rotateY(calc(var(--i) * var(--ba)))
+    translateZ(calc(-1 * (.5 * var(--w) + .5em) / tan(.5 * var(--ba))));
+  border: 1px solid rgba(var(--glow-rgb), 0.25);
+  position: relative;
 }
 
 @keyframes carousel-spin {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
+  to { rotate: y 1turn; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-ring { animation-duration: 128s; }
 }
 
 /* Ticker animation */

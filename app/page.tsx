@@ -140,10 +140,6 @@ const countryMaps = [
 
 /* Fixed background 3D spinning carousel of country maps */
 function SpinningCarousel() {
-  const total = countryMaps.length
-  const angleStep = 360 / total
-  const radius = 340 // translateZ distance
-
   return (
     <div className="carousel-bg" aria-hidden="true">
       <div className="carousel-scene">
@@ -152,9 +148,7 @@ function SpinningCarousel() {
             <div
               key={c.name}
               className="carousel-card"
-              style={{
-                transform: `rotateY(${i * angleStep}deg) translateZ(${radius}px)`,
-              }}
+              style={{ "--i": i } as React.CSSProperties}
             >
               <img
                 src={c.image}
@@ -162,7 +156,7 @@ function SpinningCarousel() {
                 className="h-full w-full object-cover"
                 draggable={false}
               />
-              <span className="absolute bottom-2 left-0 right-0 text-center text-[10px] uppercase tracking-widest text-white/70">
+              <span className="absolute bottom-2 left-0 right-0 text-center text-[10px] uppercase tracking-widest text-white/60">
                 {c.name}
               </span>
             </div>
