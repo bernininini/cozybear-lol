@@ -8,49 +8,10 @@ import { PortraitFrame } from "@/components/portrait-frame"
 import { WeatherTicker } from "@/components/weather-ticker"
 import { Github, Linkedin, Mail } from "lucide-react"
 
-const projects = [
-  {
-    title: "BayLee",
-    subtitle: "Gen AI Award @ UTRA Hacks (Top 7/350)",
-    description:
-      "AI-powered health assistant robot. Python, Vercel AI SDK, Redis microservices, and OpenAI Whisper for voice control.",
-    tags: ["Python", "AI SDK", "Redis", "Whisper"],
-    image: "/images/project-baylee.jpg",
-    date: "Feb 2025",
-  },
-  {
-    title: "Snow Pea",
-    subtitle: "Participant @ Hack Club Undercity",
-    description:
-      "Integrated hardware and software systems with collaborative GitHub workflows.",
-    tags: ["Hardware", "Full Stack", "GitHub"],
-    image: "/images/project-snowpea.jpg",
-    date: "Jul 2025",
-  },
-  {
-    title: "Neo=Alert",
-    subtitle: "Participant @ Hack The Ridge",
-    description:
-      "Medical alert platform using a custom ML model to detect bradycardia in infants.",
-    tags: ["Machine Learning", "Healthcare", "Python"],
-    image: "/images/project-neoalert.jpg",
-    date: "Dec 2024",
-  },
-  {
-    title: "Bean Cake",
-    subtitle: "Personal Project",
-    description:
-      "High-speed tank-drive spy robot with real-time camera streaming. Chassis designed in Fusion 360, powered by ESP32 and Arduino.",
-    tags: ["ESP32", "Arduino", "Fusion 360", "Robotics"],
-    image: "/images/project-beancake.jpg",
-    date: "Aug 2025",
-  },
-]
-
 const awards = [
-  { title: "Gen AI Award", event: "UTRA Hacks", detail: "Top 7 / 350" },
-  { title: "Participant", event: "Hack Club Undercity", detail: "Jul 2025" },
-  { title: "Participant", event: "Hack The Ridge", detail: "Dec 2024" },
+  { title: "Gen AI Award", event: "UTRA Hacks", detail: "Feb 2025" },
+  { title: "Top 10 Finalist", event: "Hack Club Undercity", detail: "Jul 2025" },
+  { title: "2nd Place", event: "Hack The Ridge", detail: "Dec 2024" },
   { title: "Participant", event: "Scrapyard Toronto", detail: "2025" },
   { title: "Distinction (Top 25%)", event: "Canadian Computing Competition", detail: "CCC" },
   { title: "Ontario Scholar Award", event: "York Mills CI", detail: "2025" },
@@ -286,47 +247,8 @@ export default function Home() {
         </div>
       </GalleryWall>
 
-      {/* === PROJECTS WALL === */}
-      <GalleryWall title="Projects" subtitle="things I built and shipped" index={1}>
-        <div className="grid gap-6 sm:grid-cols-2">
-          {projects.map((project, i) => (
-            <PortraitFrame
-              key={project.title}
-              index={i}
-              image={project.image}
-              alt={project.title}
-            >
-              <div className="flex items-baseline justify-between gap-2">
-                <h3 className="font-serif text-lg font-bold text-foreground text-glow-subtle">
-                  {project.title}
-                </h3>
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                  {project.date}
-                </span>
-              </div>
-              <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                {project.subtitle}
-              </p>
-              <p className="mt-2 text-xs leading-relaxed text-foreground/60">
-                {project.description}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-border px-2 py-0.5 text-[10px] text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </PortraitFrame>
-          ))}
-        </div>
-      </GalleryWall>
-
       {/* === AWARDS WALL === */}
-      <GalleryWall title="Awards" subtitle="recognition" index={2}>
+      <GalleryWall title="Awards" subtitle="recognition" index={1}>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {awards.map((item, i) => (
             <PortraitFrame key={item.event + item.title} index={i}>
@@ -343,7 +265,7 @@ export default function Home() {
       </GalleryWall>
 
       {/* === EXPERIENCE WALL === */}
-      <GalleryWall title="Experience" subtitle="where I have worked" index={3}>
+      <GalleryWall title="Experience" subtitle="where I have worked" index={2}>
         <div className="grid gap-5 sm:grid-cols-2">
           {experience.map((item, i) => (
             <PortraitFrame key={item.role} index={i}>
@@ -363,7 +285,7 @@ export default function Home() {
       </GalleryWall>
 
       {/* === EDUCATION WALL === */}
-      <GalleryWall title="Education" subtitle="where I have studied" index={4}>
+      <GalleryWall title="Education" subtitle="where I have studied" index={3}>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
