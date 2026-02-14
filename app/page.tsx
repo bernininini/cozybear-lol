@@ -51,7 +51,7 @@ const awards = [
   { title: "Gen AI Award", event: "UTRA Hacks", detail: "Feb 2025" },
   { title: "Top 10 Finalist", event: "Hack Club Undercity", detail: "Jul 2025" },
   { title: "2nd Place", event: "Hack The Ridge", detail: "Dec 2024" },
-  { title: "Participant", event: "Scrapyard Toronto", detail: "2025" },
+  { title: "2nd Place", event: "Scrapyard Toronto", detail: "2025" },
   { title: "Distinction (Top 25%)", event: "Canadian Computing Competition", detail: "CCC" },
   { title: "Ontario Scholar Award", event: "York Mills CI", detail: "2025" },
   { title: "Computer Engineering Distinction", event: "York Mills CI", detail: "Award" },
