@@ -95,18 +95,6 @@ const skills = [
   "Adobe PS",
 ]
 
-const countries = [
-  { name: "Canada", code: "CA" },
-  { name: "USA", code: "US" },
-  { name: "Japan", code: "JP" },
-  { name: "Taiwan", code: "TW" },
-  { name: "China", code: "CN" },
-  { name: "Hong Kong", code: "HK" },
-  { name: "Indonesia", code: "ID" },
-  { name: "Thailand", code: "TH" },
-  { name: "Malaysia", code: "MY" },
-]
-
 const links = [
   { label: "GitHub", href: "https://github.com/bernininini", icon: Github },
   { label: "LinkedIn", href: "https://linkedin.com/in/bernice-qiu", icon: Linkedin },
@@ -138,42 +126,50 @@ function AnimatedSection({
   )
 }
 
-/* Spinning 3D Globe of countries visited */
-function GlobeRing() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
+const countryMaps = [
+  { name: "Canada", image: "/images/map-canada.jpg" },
+  { name: "USA", image: "/images/map-usa.jpg" },
+  { name: "Japan", image: "/images/map-japan.jpg" },
+  { name: "Taiwan", image: "/images/map-taiwan.jpg" },
+  { name: "China", image: "/images/map-china.jpg" },
+  { name: "Hong Kong", image: "/images/map-hongkong.jpg" },
+  { name: "Indonesia", image: "/images/map-indonesia.jpg" },
+  { name: "Thailand", image: "/images/map-thailand.jpg" },
+  { name: "Malaysia", image: "/images/map-malaysia.jpg" },
+]
+
+/* Fixed background 3D spinning carousel of country maps */
+function SpinningCarousel() {
+  const total = countryMaps.length
+  const angleStep = 360 / total
+  const radius = 340 // translateZ distance
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.8 }}
-      className="flex flex-col items-center gap-8"
-    >
-      {/* 3D spinning ring */}
-      <div className="globe-scene">
-        <div className="globe-ring">
-          {countries.map((country, i) => {
-            const angle = (360 / countries.length) * i
-            return (
-              <div
-                key={country.code}
-                className="globe-item"
-                style={{
-                  transform: `rotateY(${angle}deg) translateZ(180px)`,
-                }}
-              >
-                <span className="inline-flex flex-col items-center gap-1 text-foreground text-glow-subtle">
-                  <span className="text-2xl">{country.code}</span>
-                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground">{country.name}</span>
-                </span>
-              </div>
-            )
-          })}
+    <div className="carousel-bg" aria-hidden="true">
+      <div className="carousel-scene">
+        <div className="carousel-ring">
+          {countryMaps.map((c, i) => (
+            <div
+              key={c.name}
+              className="carousel-card"
+              style={{
+                transform: `rotateY(${i * angleStep}deg) translateZ(${radius}px)`,
+              }}
+            >
+              <img
+                src={c.image}
+                alt=""
+                className="h-full w-full object-cover"
+                draggable={false}
+              />
+              <span className="absolute bottom-2 left-0 right-0 text-center text-[10px] uppercase tracking-widest text-white/70">
+                {c.name}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -193,6 +189,11 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen pb-12 transition-colors duration-500">
+      {/* 3D spinning country maps -- fixed background layer */}
+      <SpinningCarousel />
+
+      {/* All content above the carousel */}
+      <div className="relative z-10">
       <LightSwitch isLight={isLight} onToggle={() => setIsLight((p) => !p)} />
 
       {/* === HERO === */}
@@ -291,13 +292,8 @@ export default function Home() {
         </div>
       </GalleryWall>
 
-      {/* === COUNTRIES GLOBE === */}
-      <GalleryWall title="Places" subtitle="countries visited" index={1}>
-        <GlobeRing />
-      </GalleryWall>
-
       {/* === PROJECTS WALL === */}
-      <GalleryWall title="Projects" subtitle="things I built and shipped" index={2}>
+      <GalleryWall title="Projects" subtitle="things I built and shipped" index={1}>
         <div className="grid gap-6 sm:grid-cols-2">
           {projects.map((project, i) => (
             <PortraitFrame
@@ -336,7 +332,7 @@ export default function Home() {
       </GalleryWall>
 
       {/* === AWARDS WALL === */}
-      <GalleryWall title="Awards" subtitle="recognition" index={3}>
+      <GalleryWall title="Awards" subtitle="recognition" index={2}>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {awards.map((item, i) => (
             <PortraitFrame key={item.event + item.title} index={i}>
@@ -353,7 +349,7 @@ export default function Home() {
       </GalleryWall>
 
       {/* === EXPERIENCE WALL === */}
-      <GalleryWall title="Experience" subtitle="where I have worked" index={4}>
+      <GalleryWall title="Experience" subtitle="where I have worked" index={3}>
         <div className="grid gap-5 sm:grid-cols-2">
           {experience.map((item, i) => (
             <PortraitFrame key={item.role} index={i}>
@@ -373,7 +369,7 @@ export default function Home() {
       </GalleryWall>
 
       {/* === EDUCATION WALL === */}
-      <GalleryWall title="Education" subtitle="where I have studied" index={5}>
+      <GalleryWall title="Education" subtitle="where I have studied" index={4}>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
@@ -414,6 +410,7 @@ export default function Home() {
 
       {/* === ROLLING WEATHER TICKER === */}
       <WeatherTicker />
+      </div>{/* end z-10 wrapper */}
     </div>
   )
 }

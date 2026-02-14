@@ -111,34 +111,53 @@
   }
 }
 
-/* 3D spinning globe */
-.globe-scene {
-  perspective: 800px;
-  width: 100%;
+/* 3D spinning carousel -- fixed background layer */
+.carousel-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  opacity: 0.12;
 }
 
-.globe-ring {
-  width: 200px;
+.light .carousel-bg {
+  opacity: 0.08;
+}
+
+.carousel-scene {
+  perspective: 1200px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-ring {
+  width: 160px;
   height: 200px;
   position: relative;
   transform-style: preserve-3d;
-  animation: globe-spin 20s linear infinite;
+  animation: carousel-spin 35s linear infinite;
 }
 
-.globe-item {
+.carousel-card {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  width: 160px;
+  height: 200px;
+  top: 0;
+  left: 0;
   transform-style: preserve-3d;
   backface-visibility: hidden;
-  margin-left: -30px;
-  margin-top: -20px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--glow-rgb), 0.2);
 }
 
-@keyframes globe-spin {
+@keyframes carousel-spin {
   from { transform: rotateY(0deg); }
   to { transform: rotateY(360deg); }
 }
