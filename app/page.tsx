@@ -288,47 +288,49 @@ export default function Home() {
 
       {/* === PROJECTS WALL (no images, text only) === */}
       <GalleryWall title="Projects" subtitle="things I built and shipped" index={1}>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {projects.map((project, i) => (
             <PortraitFrame key={project.title} index={i}>
-              <div className="flex items-baseline justify-between gap-2">
-                <h3 className="font-serif text-lg font-bold text-foreground text-glow-subtle">
-                  {project.title}
-                </h3>
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                  {project.date}
-                </span>
-              </div>
-              <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                {project.subtitle}
-              </p>
-              <p className="mt-2 text-xs leading-relaxed text-foreground/60">
-                {project.description}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-border px-2 py-0.5 text-[10px] text-muted-foreground"
-                  >
-                    {tag}
+              <div className="overflow-hidden">
+                <div className="flex items-baseline justify-between gap-2">
+                  <h3 className="font-serif text-lg font-bold text-foreground text-glow-subtle">
+                    {project.title}
+                  </h3>
+                  <span className="shrink-0 text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {project.date}
                   </span>
-                ))}
-              </div>
-              {/* Rolling link at the bottom of the frame */}
-              <div className="mt-4 overflow-hidden border-t border-border pt-2">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <div className="animate-ticker whitespace-nowrap">
-                    <span className="inline-block text-[10px] font-mono tracking-wider text-muted-foreground hover:text-foreground transition-colors">
-                      {project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;{project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;{project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;
+                </div>
+                <p className="mt-0.5 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                  {project.subtitle}
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-foreground/60">
+                  {project.description}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="border border-border px-2 py-0.5 text-[10px] text-muted-foreground"
+                    >
+                      {tag}
                     </span>
-                  </div>
-                </a>
+                  ))}
+                </div>
+                {/* Rolling link at the bottom of the frame */}
+                <div className="mt-4 overflow-hidden border-t border-border pt-2">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <div className="animate-ticker whitespace-nowrap">
+                      <span className="inline-block text-[10px] font-mono tracking-wider text-muted-foreground hover:text-foreground transition-colors">
+                        {project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;{project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;{project.link}&nbsp;&nbsp;&nbsp;///&nbsp;&nbsp;&nbsp;
+                      </span>
+                    </div>
+                  </a>
+                </div>
               </div>
             </PortraitFrame>
           ))}
