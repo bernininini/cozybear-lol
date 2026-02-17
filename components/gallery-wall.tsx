@@ -16,9 +16,9 @@ export function GalleryWall({ title, subtitle, children, index = 0 }: GalleryWal
 
   return (
     <section ref={ref} className="relative mx-auto max-w-6xl px-6 py-16">
-      {/* Wall background */}
+      {/* Wall entrance animation */}
       <motion.div
-        className="absolute inset-0 bg-[var(--wall-color)] backdrop-blur-[1px]"
+        className="absolute inset-0"
         initial={{ opacity: 0, scaleY: 0 }}
         animate={isInView ? { opacity: 1, scaleY: 1 } : {}}
         transition={{ duration: 0.6, delay: index * 0.05, ease: "easeOut" }}
